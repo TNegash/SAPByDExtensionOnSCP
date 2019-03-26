@@ -58,7 +58,7 @@
           <PropertyRef Name="salesOrderID"/>
         </Key>
         <Property Name="salesOrderID" Type="Edm.String" Nullable="false"/>
-        <Property Name="customer" Type="Edm.String"/>
+        <Property Name="customerID" Type="Edm.String"/>
         <Property Name="orderDate" Type="Edm.DateTimeOffset"/>
         <NavigationProperty Name="Salesorderitem" Relationship="Salesorderhandling.Salesorderitem_salesOrder" FromRole="Salesorder" ToRole="Salesorderitem"/>
       </EntityType>
@@ -152,7 +152,7 @@
               <PropertyValue Property="Value" Path="salesOrderID"/>
             </Record>
             <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="customer"/>
+              <PropertyValue Property="Value" Path="customerID"/>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="orderDate"/>
@@ -165,7 +165,7 @@
               <PropertyValue Property="Value" Path="salesOrderID"/>
             </Record>
             <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="customer"/>
+              <PropertyValue Property="Value" Path="customerID"/>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="orderDate"/>
@@ -176,8 +176,8 @@
       <Annotations Target="Salesorderhandling.Salesorder/salesOrderID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Sales Order ID"/>
       </Annotations>
-      <Annotations Target="Salesorderhandling.Salesorder/customer" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-        <Annotation Term="Common.Label" String="Customer"/>
+      <Annotations Target="Salesorderhandling.Salesorder/customerID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Customer ID"/>
       </Annotations>
       <Annotations Target="Salesorderhandling.Salesorder/orderDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Ordered On"/>

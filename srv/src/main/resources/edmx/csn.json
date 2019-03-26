@@ -10,10 +10,10 @@
           "type": "cds.String",
           "@cds.persistence.name": "SALESORDERID"
         },
-        "customer": {
+        "customerID": {
           "indexNo": 2,
           "type": "cds.String",
-          "@cds.persistence.name": "CUSTOMER"
+          "@cds.persistence.name": "CUSTOMERID"
         },
         "orderDate": {
           "indexNo": 3,
@@ -149,7 +149,7 @@
         {
           "$Type": "UI.DataField",
           "Value": {
-            "=": "customer"
+            "=": "customerID"
           }
         },
         {
@@ -174,7 +174,7 @@
         {
           "$Type": "UI.DataField",
           "Value": {
-            "=": "customer"
+            "=": "customerID"
           }
         },
         {
@@ -214,15 +214,15 @@
           "type": "cds.String",
           "@cds.persistence.name": "SALESORDERID"
         },
-        "customer": {
-          "origin": "my.app.Salesorder..customer",
+        "customerID": {
+          "origin": "my.app.Salesorder..customerID",
           "indexNo": 2,
           "value": {
-            "=": "Salesorder.customer"
+            "=": "Salesorder.customerID"
           },
-          "@Common.Label": "Customer",
+          "@Common.Label": "Customer ID",
           "type": "cds.String",
-          "@cds.persistence.name": "CUSTOMER"
+          "@cds.persistence.name": "CUSTOMERID"
         },
         "orderDate": {
           "origin": "my.app.Salesorder..orderDate",
