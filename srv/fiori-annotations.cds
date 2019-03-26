@@ -17,18 +17,50 @@ annotate Salesorderhandling.Products with @(
   ]
 );
 
+annotate Salesorderhandling.Customers with {
+	ObjectID
+		@Common.Label: 'Node ID'
+		@Common.FieldControl: #Hidden;
+	InternalID
+		@title : 'Customer ID';
+	BusinessPartnerName
+		@title : 'Customer Name';
+};
+
+annotate Salesorderhandling.Customers with @(
+
+  UI.Identification:  
+  [ {$Type: 'UI.DataField', Value: InternalID},
+  {$Type: 'UI.DataField', Value: BusinessPartnerName},
+  ]
+);
+
 annotate Salesorderhandling.Salesorder with {
 	salesOrderID 
 		@Common.Label : 'Sales Order ID';
-	customer
-		@Common.Label : 'Customer';
+	customerID
+		@Common.Label : 'Customer ID'
+		@sap.value.list: 'Customers'
+		@Common.ValueList: { 
+			entity: 'Customers',
+			Label: 'Customers',
+			SearchSupported: 'true',
+			Parameters: [
+				{ $Type: 'Common.ValueListParameterInOut', LocalDataProperty: 'customerID', ValueListProperty: 'InternalID', Label: 'Customer ID' },
+				 { $Type: 'Common.ValueListParameterInOut', LocalDataProperty: 'customerName', ValueListProperty: 'BusinessPartnerName', Label: 'Customer Name'},
+			]
+		};
+	customerName
+	@Common.Label : 'Customer Name'
+		@Common.FieldControl: #ReadOnly;	
 	orderDate
 		@Common.Label : 'Ordered On';
 };
 annotate Salesorderhandling.Salesorder with @(
 	UI.LineItem: [ 
 		{$Type: 'UI.DataField', Value: salesOrderID},
-		{$Type: 'UI.DataField', Value: customer},
+		{$Type: 'UI.DataField', Value: customerID},
+		{$Type: 'UI.DataField', Value: customerName},
 		{$Type: 'UI.DataField', Value: orderDate},
 	],
 	
@@ -41,7 +73,8 @@ annotate Salesorderhandling.Salesorder with @(
 	UI.Identification:
 	[
 		{$Type: 'UI.DataField', Value: salesOrderID},
-		{$Type: 'UI.DataField', Value: customer},
+		{$Type: 'UI.DataField', Value: customerID},
+		{$Type: 'UI.DataField', Value: customerName},
 		{$Type: 'UI.DataField', Value: orderDate}
 	],
 	
@@ -129,7 +162,7 @@ annotate Salesorderhandling.Salesorderitem  with @(
     UI.FieldGroup#GeneralInfo: {
     Label: 'General Info',
     Data: [
-    {$Type: 'UI.DataField', Value: salesOrder_salesOrderID  },
+     {$Type: 'UI.DataField', Value: salesOrder_salesOrderID  },
       {$Type: 'UI.DataField', Value: itemID},
       {$Type: 'UI.DataField', Value: productID},
       {$Type: 'UI.DataField', Value: productDescription}
@@ -153,5 +186,5 @@ annotate Salesorderhandling.Salesorderitem  with @(
 	 	{$Type: 'UI.DataField', Value: currency},
     ]
   },
-  
+	
 );

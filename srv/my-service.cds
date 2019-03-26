@@ -1,5 +1,7 @@
+
 using my.app from '../db/data-model';
  using cust as cust_API_product from './external/csn/byd_product';
+  using cust as cust_API_customer from './external/csn/byd_customer';
 service Salesorderhandling {
   
   @insertonly entity Salesorder as projection on app.Salesorder;
@@ -15,6 +17,13 @@ service Salesorderhandling {
 	key ObjectID as ObjectID,
 	InternalID as InternalID,
  	Description as Description
+ };
+  
+   @cds.persistence.skip
+ Entity Customers as projection on cust_API_customer.Customer {
+	key ObjectID as ObjectID,
+	InternalID as InternalID,
+ 	BusinessPartnerName as BusinessPartnerName
  };
   
 }

@@ -1,7 +1,8 @@
 namespace my.app;
 entity Salesorder{
  Key salesOrderID : String;
-  customer  : String;
+  customerID  : String;
+  customerName  : String;
   orderDate : DateTime;
   Salesorderitem : Composition of many Salesorderitem on Salesorderitem.salesOrder = $self;
 }

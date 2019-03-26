@@ -10,18 +10,23 @@
           "type": "cds.String",
           "@cds.persistence.name": "SALESORDERID"
         },
-        "customer": {
+        "customerID": {
           "indexNo": 2,
           "type": "cds.String",
-          "@cds.persistence.name": "CUSTOMER"
+          "@cds.persistence.name": "CUSTOMERID"
+        },
+        "customerName": {
+          "indexNo": 3,
+          "type": "cds.String",
+          "@cds.persistence.name": "CUSTOMERNAME"
         },
         "orderDate": {
-          "indexNo": 3,
+          "indexNo": 4,
           "type": "cds.DateTime",
           "@cds.persistence.name": "ORDERDATE"
         },
         "Salesorderitem": {
-          "indexNo": 4,
+          "indexNo": 5,
           "type": "cds.Composition",
           "target": "my.app.Salesorderitem",
           "cardinality": {
@@ -149,7 +154,13 @@
         {
           "$Type": "UI.DataField",
           "Value": {
-            "=": "customer"
+            "=": "customerID"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "customerName"
           }
         },
         {
@@ -174,7 +185,13 @@
         {
           "$Type": "UI.DataField",
           "Value": {
-            "=": "customer"
+            "=": "customerID"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "customerName"
           }
         },
         {
@@ -214,19 +231,50 @@
           "type": "cds.String",
           "@cds.persistence.name": "SALESORDERID"
         },
-        "customer": {
-          "origin": "my.app.Salesorder..customer",
+        "customerID": {
+          "origin": "my.app.Salesorder..customerID",
           "indexNo": 2,
           "value": {
-            "=": "Salesorder.customer"
+            "=": "Salesorder.customerID"
           },
-          "@Common.Label": "Customer",
+          "@Common.Label": "Customer ID",
+          "@sap.value.list": "Customers",
+          "@Common.ValueList.entity": "Customers",
+          "@Common.ValueList.Label": "Customers",
+          "@Common.ValueList.SearchSupported": "true",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterInOut",
+              "LocalDataProperty": "customerID",
+              "ValueListProperty": "InternalID",
+              "Label": "Customer ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterInOut",
+              "LocalDataProperty": "customerName",
+              "ValueListProperty": "BusinessPartnerName",
+              "Label": "Customer Name"
+            }
+          ],
           "type": "cds.String",
-          "@cds.persistence.name": "CUSTOMER"
+          "@cds.persistence.name": "CUSTOMERID"
+        },
+        "customerName": {
+          "origin": "my.app.Salesorder..customerName",
+          "indexNo": 3,
+          "value": {
+            "=": "Salesorder.customerName"
+          },
+          "@Common.Label": "Customer Name",
+          "@Common.FieldControl": {
+            "#": "ReadOnly"
+          },
+          "type": "cds.String",
+          "@cds.persistence.name": "CUSTOMERNAME"
         },
         "orderDate": {
           "origin": "my.app.Salesorder..orderDate",
-          "indexNo": 3,
+          "indexNo": 4,
           "value": {
             "=": "Salesorder.orderDate"
           },
@@ -236,7 +284,7 @@
         },
         "Salesorderitem": {
           "origin": "my.app.Salesorder..Salesorderitem",
-          "indexNo": 4,
+          "indexNo": 5,
           "value": {
             "=": "Salesorder.Salesorderitem"
           },
@@ -668,6 +716,65 @@
       },
       "@cds.persistence.name": "SALESORDERHANDLING_PRODUCTS"
     },
+    "Salesorderhandling.Customers": {
+      "kind": "entity",
+      "source": "cust.Customer",
+      "@cds.persistence.skip": true,
+      "@UI.Identification": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "InternalID"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "BusinessPartnerName"
+          }
+        }
+      ],
+      "elements": {
+        "ObjectID": {
+          "value": {
+            "=": "ObjectID"
+          },
+          "key": true,
+          "indexNo": 1,
+          "origin": "cust.Customer..ObjectID",
+          "@Common.Label": "Node ID",
+          "@Common.FieldControl": {
+            "#": "Hidden"
+          },
+          "type": "cds.String",
+          "length": 70,
+          "@cds.persistence.name": "OBJECTID"
+        },
+        "InternalID": {
+          "value": {
+            "=": "InternalID"
+          },
+          "indexNo": 2,
+          "origin": "cust.Customer..InternalID",
+          "type": "cds.String",
+          "length": 10,
+          "@Common.Label": "Customer ID",
+          "@cds.persistence.name": "INTERNALID"
+        },
+        "BusinessPartnerName": {
+          "value": {
+            "=": "BusinessPartnerName"
+          },
+          "indexNo": 3,
+          "origin": "cust.Customer..BusinessPartnerName",
+          "type": "cds.String",
+          "length": 40,
+          "@Common.Label": "Customer Name",
+          "@cds.persistence.name": "BUSINESSPARTNERNAME"
+        }
+      },
+      "@cds.persistence.name": "SALESORDERHANDLING_CUSTOMERS"
+    },
     "cust.Material": {
       "kind": "entity",
       "@cds.persistence.skip": true,
@@ -728,6 +835,33 @@
         }
       },
       "@cds.persistence.name": "CUST_CODELIST"
+    },
+    "cust.Customer": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "ObjectID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 70,
+          "@cds.persistence.name": "OBJECTID"
+        },
+        "InternalID": {
+          "type": "cds.String",
+          "length": 10,
+          "@cds.persistence.name": "INTERNALID"
+        },
+        "UUID": {
+          "type": "cds.UUID",
+          "@cds.persistence.name": "UUID"
+        },
+        "BusinessPartnerName": {
+          "type": "cds.String",
+          "length": 40,
+          "@cds.persistence.name": "BUSINESSPARTNERNAME"
+        }
+      },
+      "@cds.persistence.name": "CUST_CUSTOMER"
     }
   },
   "version": {

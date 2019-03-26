@@ -33,6 +33,7 @@
   <edmx:DataServices m:DataServiceVersion="2.0">
     <Schema Namespace="Salesorderhandling" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
       <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+        <EntitySet Name="Customers" EntityType="Salesorderhandling.Customers"/>
         <EntitySet Name="Products" EntityType="Salesorderhandling.Products"/>
         <EntitySet Name="Salesorder" EntityType="Salesorderhandling.Salesorder"/>
         <EntitySet Name="Salesorderitem" EntityType="Salesorderhandling.Salesorderitem"/>
@@ -45,6 +46,14 @@
           <End Role="Salesorder" EntitySet="Salesorder"/>
         </AssociationSet>
       </EntityContainer>
+      <EntityType Name="Customers">
+        <Key>
+          <PropertyRef Name="ObjectID"/>
+        </Key>
+        <Property Name="ObjectID" Type="Edm.String" MaxLength="70" Nullable="false"/>
+        <Property Name="InternalID" Type="Edm.String" MaxLength="10"/>
+        <Property Name="BusinessPartnerName" Type="Edm.String" MaxLength="40"/>
+      </EntityType>
       <EntityType Name="Products">
         <Key>
           <PropertyRef Name="ObjectID"/>
@@ -58,7 +67,8 @@
           <PropertyRef Name="salesOrderID"/>
         </Key>
         <Property Name="salesOrderID" Type="Edm.String" Nullable="false"/>
-        <Property Name="customer" Type="Edm.String"/>
+        <Property Name="customerID" Type="Edm.String" sap:value-list="Customers"/>
+        <Property Name="customerName" Type="Edm.String"/>
         <Property Name="orderDate" Type="Edm.DateTimeOffset"/>
         <NavigationProperty Name="Salesorderitem" Relationship="Salesorderhandling.Salesorderitem_salesOrder" FromRole="Salesorder" ToRole="Salesorderitem"/>
       </EntityType>
@@ -93,6 +103,28 @@
           </Dependent>
         </ReferentialConstraint>
       </Association>
+      <Annotations Target="Salesorderhandling.Customers" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.Identification">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="InternalID"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="BusinessPartnerName"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Salesorderhandling.Customers/ObjectID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
+        <Annotation Term="Common.Label" String="Node ID"/>
+      </Annotations>
+      <Annotations Target="Salesorderhandling.Customers/InternalID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Customer ID"/>
+      </Annotations>
+      <Annotations Target="Salesorderhandling.Customers/BusinessPartnerName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Customer Name"/>
+      </Annotations>
       <Annotations Target="Salesorderhandling.Products" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="UI.Identification">
           <Collection>
@@ -152,7 +184,10 @@
               <PropertyValue Property="Value" Path="salesOrderID"/>
             </Record>
             <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="customer"/>
+              <PropertyValue Property="Value" Path="customerID"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="customerName"/>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="orderDate"/>
@@ -165,7 +200,10 @@
               <PropertyValue Property="Value" Path="salesOrderID"/>
             </Record>
             <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="customer"/>
+              <PropertyValue Property="Value" Path="customerID"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="customerName"/>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="orderDate"/>
@@ -176,8 +214,33 @@
       <Annotations Target="Salesorderhandling.Salesorder/salesOrderID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Sales Order ID"/>
       </Annotations>
-      <Annotations Target="Salesorderhandling.Salesorder/customer" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-        <Annotation Term="Common.Label" String="Customer"/>
+      <Annotations Target="Salesorderhandling.Salesorder/customerID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Customer ID"/>
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="SearchSupported" Bool="true"/>
+            <PropertyValue Property="Label" String="Customers"/>
+            <PropertyValue Property="CollectionPath" String="Customers"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="customerID"/>
+                  <PropertyValue Property="ValueListProperty" String="InternalID"/>
+                  <PropertyValue Property="Label" String="Customer ID"/>
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="customerName"/>
+                  <PropertyValue Property="ValueListProperty" String="BusinessPartnerName"/>
+                  <PropertyValue Property="Label" String="Customer Name"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Salesorderhandling.Salesorder/customerName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+        <Annotation Term="Common.Label" String="Customer Name"/>
       </Annotations>
       <Annotations Target="Salesorderhandling.Salesorder/orderDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Ordered On"/>
