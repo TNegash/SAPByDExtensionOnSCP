@@ -39,7 +39,7 @@ Exercise 1 is a prerequisite for exercise 2. Therefore, to start with exercise 2
 #### Step 1:  Enhance the data model
 1.  Go to the file WorkSpace/SalesOrderProcessing/db/data-model.cds and double click the file.
 2. Adjust the content of the file data.model.cds  as shown in the screen shot below. That is, for the entity Salesorder replace the element customer with customerID and add a new element customerName.
-![](./Resource/images/Enhance_DataModel_01.jpg)
+![](./Resource/Images/Enhance_DataModel_01.jpg)
 #### Step 2: Add Remote Service
 In this step we will add a customer data remote service (SAP usiness ByDesign Customer OData API) to the Sales Order Processing application.
 
@@ -53,7 +53,7 @@ In this step we will add a customer data remote service (SAP usiness ByDesign Cu
 ![](./Resource/Images/Remote_Service_03.jpg)
 
  -  On the following screen populate the fields as specified below and click Create.
-![](./Resource/images/Destination_for_external_datamodel.jpg)
+![](./Resource/Images/Destination_for_external_datamodel.jpg)
  -  Next, enter the relative URL of the OData API and press Test. ‘/sap/byd/odata/cust/v1/byd_customer/$metadata’ is an example of relative URL of the OData API. If the result looks like in the screen shot below click Next.
 ![](./Resource/Images/Data_model_from_external_service_1.jpg)
  -  On the ‘Confirmation’ screen select ‘Generate Virtual Data Model Classes’ and click Finish. This will lead, among others, to the generation of service definitions (e.g. byd_customer.json and byd_customer.xml) in the folder WorkSpace/SalesOrderProcessing/srv/external/csn.
