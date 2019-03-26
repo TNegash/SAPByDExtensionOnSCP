@@ -1,6 +1,6 @@
 # SAP Business ByDesign Side-by-Side Extensions on SAP Cloud Platform
 Detailed information regarding the SAP Business ByDesign side-by-side Extension on SAP Cloud Platform using 
-SAP Cloud Application Programming Model can be found in the blog post series
+SAP Cloud Application Programming Model (CAP) can be found in the blog post series
 [SAP Business ByDesign Side-by-Side Extensions on SAP Cloud Platform](https://blogs.sap.com/2019/02/03/sap-business-bydesign-side-by-side-extensions/?preview_id=774314).
 
 ## Description 
