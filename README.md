@@ -46,23 +46,23 @@ In this step we will add a customer data remote service (SAP usiness ByDesign Cu
  1. Right click on WorkSpace/SalesOrderProcessing/srv and select New → Data Model from External Service.
 
 
-![](./Resource/images/Remote_Service_02.jpg)
+![](./Resource/Images/Remote_Service_02.jpg)
 
  2. On the ‘Data Connection’ screen select under ‘Sources’ the entry ‘Service URL’ and click on ‘create new data sources’
 
-![](./Resource/images/Remote_Service_03.jpg)
+![](./Resource/Images/Remote_Service_03.jpg)
 
  -  On the following screen populate the fields as specified below and click Create.
 ![](./Resource/images/Destination_for_external_datamodel.jpg)
  -  Next, enter the relative URL of the OData API and press Test. ‘/sap/byd/odata/cust/v1/byd_customer/$metadata’ is an example of relative URL of the OData API. If the result looks like in the screen shot below click Next.
-![](./Resource/images/Data_model_from_external_service_1.jpg)
+![](./Resource/Images/Data_model_from_external_service_1.jpg)
  -  On the ‘Confirmation’ screen select ‘Generate Virtual Data Model Classes’ and click Finish. This will lead, among others, to the generation of service definitions (e.g. byd_customer.json and byd_customer.xml) in the folder WorkSpace/SalesOrderProcessing/srv/external/csn.
-![](./Resource/images/ext_data_model.jpg)
+![](./Resource/Images/ext_data_model.jpg)
 Additionally, Java virtual data model (VDM) classes are generated. These classes provide fluent and type-safe java APIs to build queries and access SAP usiness ByDesign OData endpoints.
-![](./Resource/images/VDM.jpg)
+![](./Resource/Images/VDM.jpg)
 #### Step 3: Enhance the Service Model with Reference to Remote Service Definition
  Reference the remote service definition (SAP usiness ByDesign OData API) to the service model by enhancing the file my-service.cds as shown in the screen shot below.
-![](./Resource/images/service_enhancement.jpg)
+![](./Resource/Images/service_enhancement.jpg)
 #### Step 4. Add Custom Logic 
 In this step we will implement a java custom handler that reads business partner or customer data from SAP usiness ByDesign tenant.
  1.  Add a Java class to query product data from the SAP usiness ByDesign system
@@ -96,22 +96,22 @@ In this we will adjust UI annotation to reflect the changes we did in the previo
         -   Next, double click on Tables in the content pane of the database explorer.
         -   Afterwards, click on the DB table instances listed under the content pane to display details of the DB tables.
 
-![](./Resource/images/Percistence_layer.jpg)
+![](./Resource/Images/Percistence_layer.jpg)
 2.  Deploy Java Application
 -   Right click on the project WorkSpace/SalesOrderProcessing/srv then select Run → Java Application. This will start the deployment of the Java backend application.
  -   Once the deployment of the Java application is complete, click on the URL on the upper part of the run console to test the application.
 
-![](./Resource/images/Build_Deploy_03.jpg)
+![](./Resource/Images/Build_Deploy_03.jpg)
 
   -   On the following screen click on the OData endpoints and add /$metadata to the URL to display the metadata of the endpoint.
 
-![](./Resource/images/Build_Deploy_04.jpg)
+![](./Resource/Images/Build_Deploy_04.jpg)
 
 3.  Deploy the UI Application
    -   Right click on the project WorkSpace/SalesOrderProcessing/Sales_Order_App then select Run → Run as Web Application. This will start the deployment of the UI Application. If you are running the application for the first time, you will be requested to choose between flpSandBox and flpSandboxMockServer. Select flpSandBox and press OK.
     -   Once the deployment is complete, a launch pad with the Sales_Order_App tile as shown below will appear.
 
-![](./Resource/images/Build_Deploy_05.jpg)
+![](./Resource/Images/Build_Deploy_05.jpg)
 
   -   Double click on the tile Sales_Order_App to launch the application.
     -   On the following screen, you can start testing the capabilities of the application that you have developed.
